@@ -168,7 +168,7 @@ export class Api {
 const api = new Api({
   baseUrl: 'http://api.mesto.nomoredomains.icu',
   headers: {
-    authorization: localStorage.getItem('jwt'),
+    authorization: 'Bearer ' + localStorage.getItem('jwt'),
     contentType: 'application/json'
   }
 });
