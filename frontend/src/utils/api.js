@@ -86,7 +86,7 @@ export class Api {
   }
 
   putLike(_id) {
-    return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'PUT',
       headers: {
         authorization: this._authorization,
@@ -103,7 +103,7 @@ export class Api {
   }
 
   removeLike(_id) {
-    return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+    return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization,
