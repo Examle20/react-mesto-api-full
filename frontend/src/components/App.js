@@ -70,13 +70,13 @@ function App(props) {
   }
 
   React.useEffect(() =>{
-    api.getUser(localStorage.getItem('jwt'))
+    api.getUser()
       .then((res) => {
         setCurrentUser(res);
       },)
       .catch(err => console.log(err))
     setIsloading(true)
-    api.getInitialCards(localStorage.getItem('jwt'))
+    api.getInitialCards()
       .then((res) => {
         setCards(res);
         setIsloading(false)

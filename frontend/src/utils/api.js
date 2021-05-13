@@ -7,12 +7,12 @@ export class Api {
     this._contentType = contentType;
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,
       {
         headers: {
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          authorization: this._authorization,
+          'Content-Type': this._contentType,
         }
       }
     )
@@ -25,12 +25,12 @@ export class Api {
       })
   }
 
-  getUser(token) {
+  getUser() {
     return fetch(`${this._baseUrl}/users/me`,
       {
         headers:{
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          authorization: this._authorization,
+          'Content-Type': this._contentType,
         }
       }
     )
@@ -42,132 +42,133 @@ export class Api {
         }
       })
   }
-//
-//   editUserInfo(name, about) {
-//     return fetch(`${this._baseUrl}/users/me`,{
-//       method: 'PATCH',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       },
-//       body: JSON.stringify({
-//         name: name,
-//         about: about
-//       })
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//
-//   addCard(name, link) {
-//     return fetch(`${this._baseUrl}/cards`, {
-//       method: 'POST',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       },
-//       body: JSON.stringify({
-//         name: name,
-//         link: link,
-//       })
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//
-//   putLike(_id) {
-//     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
-//       method: 'PUT',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       }
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//
-//   removeLike(_id) {
-//     return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
-//       method: 'DELETE',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       }
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//
-//   removeCard(_id) {
-//     return fetch(`${this._baseUrl}/cards/${_id}`, {
-//       method: 'DELETE',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       },
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//
-//   changeAvatar(avatar) {
-//     return fetch(`${this._baseUrl}/users/me/avatar`, {
-//       method: 'PATCH',
-//       headers: {
-//         authorization: this._authorization,
-//         'Content-Type': this._contentType,
-//       },
-//       body: JSON.stringify({
-//         avatar: avatar,
-//       })
-//     })
-//       .then(res => {
-//         if (!res.ok){
-//           return Promise.reject(res.status)
-//         } else{
-//           return res.json();
-//         }
-//       })
-//   }
-//   changeLikeCardStatus(_id, isLiked) {
-//     if(isLiked) {
-//       return  this.removeLike(_id);
-//     }else {
-//       return this.putLike(_id);
-//     }
-//   }
+
+  editUserInfo(name, about) {
+    return fetch(`${this._baseUrl}/users/me`,{
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+
+  addCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      })
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+
+  putLike(_id) {
+    return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      }
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+
+  removeLike(_id) {
+    return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      }
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+
+  removeCard(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      },
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+
+  changeAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorization,
+        'Content-Type': this._contentType,
+      },
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    })
+      .then(res => {
+        if (!res.ok){
+          return Promise.reject(res.status)
+        } else{
+          return res.json();
+        }
+      })
+  }
+  changeLikeCardStatus(_id, isLiked) {
+    if(isLiked) {
+      return  this.removeLike(_id);
+    }else {
+      return this.putLike(_id);
+    }
+  }
 }
 
 
 const api = new Api({
   baseUrl: 'http://api.mesto.nomoredomains.icu',
   headers: {
+    authorization: 'Bearer ' + localStorage.getItem('jwt'),
     contentType: 'application/json'
   }
 });
