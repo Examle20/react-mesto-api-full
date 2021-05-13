@@ -204,6 +204,7 @@ function App(props) {
       const jwt = localStorage.getItem('jwt');
       auth.checkToken(jwt).then((res) => {
         if (res){
+          console.log(res)
           setUserEmail(res.data.email)
           setloggedIn(true);
           props.history.push('/')
