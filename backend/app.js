@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { celebrate, Joi, errors } = require('celebrate');
 const NotFoundError = require('./errors/notFoundError');
+const cors = require('cors');
 const {
   login, createUser,
 } = require('./controllers/users');
@@ -11,7 +12,7 @@ const auth = require('./middlewares/auth');
 
 const { PORT = 3001 } = process.env;
 const app = express();
-
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
