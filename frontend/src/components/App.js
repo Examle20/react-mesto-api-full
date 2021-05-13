@@ -70,7 +70,7 @@ function App(props) {
   }
 
   React.useEffect(() =>{
-    api.getUser()
+    api.getUser(localStorage.getItem('jwt'))
       .then((res) => {
         setCurrentUser(res);
       },)

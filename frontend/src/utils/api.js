@@ -25,11 +25,11 @@ export class Api {
       })
   }
 
-  getUser() {
+  getUser(token) {
     return fetch(`${this._baseUrl}/users/me`,
       {
         headers:{
-          authorization: this._authorization,
+          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }
