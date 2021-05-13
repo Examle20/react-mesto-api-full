@@ -1,0 +1,14 @@
+.header__link {
+  font-size: 18px;
+  line-height: 22px;
+  font-family: Inter;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
