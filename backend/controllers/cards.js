@@ -56,7 +56,7 @@ module.exports.likeCard = (req, res, next) => Card.findByIdAndUpdate(
     if (!card) {
       throw new NotFoundError('Карточка с таким id не найдена');
     }
-    res.status(200).send(card.likes);
+    res.status(200).send(card);
   })
   .catch((err) => {
     if (err.name === 'ValidationError' || err.name === 'CastError') {
@@ -76,7 +76,7 @@ module.exports.dislikeCard = (req, res, next) => Card.findByIdAndUpdate(
     if (!card) {
       throw new NotFoundError('Карточка с таким id не найдена');
     }
-    res.status(200).send(card.likes);
+    res.status(200).send(card);
   })
   .catch((err) => {
     if (err.name === 'ValidationError' || err.name === 'CastError') {
