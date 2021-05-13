@@ -202,7 +202,7 @@ function App(props) {
   const handleTokenCheck = () => {
     if (localStorage.getItem('jwt')){
       const jwt = localStorage.getItem('jwt');
-      auth.checkToken('Bearer ' + jwt).then((res) => {
+      auth.checkToken(jwt).then((res) => {
         if (res){
           setUserEmail(res.data.email)
           setloggedIn(true);
