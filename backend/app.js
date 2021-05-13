@@ -13,7 +13,7 @@ const auth = require('./middlewares/auth');
 const { PORT = 3001 } = process.env;
 
 const app = express();
-app.use(cors());
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger);
-
+app.use(cors());
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
