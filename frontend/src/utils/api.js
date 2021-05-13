@@ -7,11 +7,11 @@ export class Api {
     this._contentType = contentType;
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`,
       {
         headers: {
-          authorization: this._authorization,
+          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }

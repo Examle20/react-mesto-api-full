@@ -76,7 +76,7 @@ function App(props) {
       },)
       .catch(err => console.log(err))
     setIsloading(true)
-    api.getInitialCards()
+    api.getInitialCards(localStorage.getItem('jwt'))
       .then((res) => {
         setCards(res);
         setIsloading(false)
