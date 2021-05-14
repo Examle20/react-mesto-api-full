@@ -1,17 +1,15 @@
 export class Api {
 
-  constructor( {baseUrl, headers}) {
-    const {authorization, contentType} = headers;
+  constructor(baseUrl, contentType) {
     this._baseUrl = baseUrl;
-    this._authorization = authorization;
     this._contentType = contentType;
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`,
       {
         headers: {
-          authorization: this._authorization,
+          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }
@@ -25,11 +23,11 @@ export class Api {
       })
   }
 
-  getUser() {
+  getUser(token) {
     return fetch(`${this._baseUrl}/users/me`,
       {
         headers:{
-          authorization: this._authorization,
+          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }
@@ -43,11 +41,11 @@ export class Api {
       })
   }
 
-  editUserInfo(name, about) {
+  editUserInfo(name, about, token) {
     return fetch(`${this._baseUrl}/users/me`,{
       method: 'PATCH',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
       body: JSON.stringify({
@@ -64,11 +62,11 @@ export class Api {
       })
   }
 
-  addCard(name, link) {
+  addCard(name, link, token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
       body: JSON.stringify({
@@ -85,11 +83,11 @@ export class Api {
       })
   }
 
-  putLike(_id) {
+  putLike(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'PUT',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       }
     })
@@ -102,11 +100,11 @@ export class Api {
       })
   }
 
-  removeLike(_id) {
+  removeLike(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'DELETE',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       }
     })
@@ -119,11 +117,11 @@ export class Api {
       })
   }
 
-  removeCard(_id) {
+  removeCard(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
     })
@@ -136,11 +134,11 @@ export class Api {
       })
   }
 
-  changeAvatar(avatar) {
+  changeAvatar(avatar, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: this._authorization,
+        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
       body: JSON.stringify({
@@ -165,12 +163,6 @@ export class Api {
 }
 
 
-const api = new Api({
-  baseUrl: 'http://api.mesto.nomoredomains.icu',
-  headers: {
-    authorization: 'Bearer ' + localStorage.getItem('jwt'),
-    contentType: 'application/json'
-  }
-});
+const api = new Api('http://api.mesto.nomoredomains.icu', 'application/json');
 
 export default api;

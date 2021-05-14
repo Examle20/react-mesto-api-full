@@ -70,20 +70,22 @@ function App(props) {
   }
 
   React.useEffect(() =>{
-    api.getUser()
-      .then((res) => {
-        setCurrentUser(res);
-      },)
-      .catch(err => console.log(err))
-    setIsloading(true)
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res);
-        setIsloading(false)
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-  },[])
+    if (loggedIn) {
+      api.getUser(localStorage.getItem('jwt'))
+        .then((res) => {
+          setCurrentUser(res);
+        },)
+        .catch(err => console.log(err))
+      setIsloading(true)
+      api.getInitialCards(localStorage.getItem('jwt'))
+        .then((res) => {
+          setCards(res);
+          setIsloading(false)
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    }
+  },[loggedIn])
 
   const handleButtonState = (setButton, boolean ,buttonTitle) => {
     setButton({load: boolean, title: buttonTitle});
