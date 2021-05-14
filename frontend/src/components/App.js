@@ -93,7 +93,7 @@ function App(props) {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, isLiked)
+    api.changeLikeCardStatus(card._id, isLikedk, localStorage.getItem('jwt'))
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -102,7 +102,7 @@ function App(props) {
 
   function handleCardDelete(card) {
     handleButtonState(setButtonDelete, true, 'Удаление...')
-    api.removeCard(card._id)
+    api.removeCard(card._id, localStorage.getItem('jwt'))
       .then((res) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id))
         closeAllPopups();
@@ -113,7 +113,7 @@ function App(props) {
 
   const handleAddPlace = (name, link) => {
     handleButtonState(setButtonCreate,true, 'Создание...')
-    api.addCard(name, link)
+    api.addCard(name, link, localStorage.getItem('jwt'))
       .then(res => {
         setCards([res, ...cards]);
         closeAllPopups();
