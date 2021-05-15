@@ -5,7 +5,7 @@ const InvalidRequestError = require('../errors/invalidRequestError');
 const Unauthorized = require('../errors/unauthorizedError');
 const WrongEmail = require('../errors/wrongEmail');
 const User = require('../models/user');
-
+const { NODE_ENV, JWT_SECRET } = process.env;
 const secretKey = '4515bce25ce4463c3baa7be420b0ac62c8fb33d19bd1cb15056364a284ff9a2b';
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -116,7 +116,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        secretKey,
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
       res.send({ token });
