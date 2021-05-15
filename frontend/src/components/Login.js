@@ -17,6 +17,7 @@ function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log('dsa')
     props.onLogin(email, password);
   }
 

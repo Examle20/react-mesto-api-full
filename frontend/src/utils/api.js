@@ -153,11 +153,11 @@ export class Api {
         }
       })
   }
-  changeLikeCardStatus(_id, isLiked) {
+  changeLikeCardStatus(_id, isLiked, token) {
     if(isLiked) {
-      return  this.removeLike(_id);
+      return  this.removeLike(_id, token);
     }else {
-      return this.putLike(_id);
+      return this.putLike(_id, token);
     }
   }
 }

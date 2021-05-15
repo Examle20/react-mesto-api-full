@@ -177,7 +177,7 @@ function App(props) {
 
   const handleUpdateUser = ({name, about}) => {
     handleButtonState(setButtonSave, true,'Сохранение...')
-    api.editUserInfo(name, about)
+    api.editUserInfo(name, about, localStorage.getItem('jwt'))
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -190,7 +190,7 @@ function App(props) {
 
   const handleUpdateAvatar = (avatar) => {
     handleButtonState(setButtonSave, true,'Сохранение...')
-    api.changeAvatar(avatar)
+    api.changeAvatar(avatar, localStorage.getItem('jwt'))
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
