@@ -115,6 +115,7 @@ function App(props) {
     handleButtonState(setButtonCreate,true, 'Создание...')
     api.addCard(name, link, localStorage.getItem('jwt'))
       .then(res => {
+        console.log(res)
         setCards([res, ...cards]);
         closeAllPopups();
         handleButtonState(setButtonCreate,false, 'Создать')
