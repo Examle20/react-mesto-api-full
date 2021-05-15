@@ -5,8 +5,8 @@ function Card(props) {
 
   const currentUser = React.useContext(CurrentUserContext)
   const card = props.card;
-
-  const isOwn = card.owner._id === currentUser._id;
+  const cardId = card.owner._id || card.owner
+  const isOwn = cardId === currentUser._id;
   const basketButtonClassName = (
     `elements__basket ${isOwn ? '': 'elements__basket_hidden'}`
   )
