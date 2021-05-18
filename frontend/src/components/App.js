@@ -106,7 +106,7 @@ function App(props) {
       .then((res) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id))
         closeAllPopups();
-        handleButtonState(setButtonDelete, true, 'Да')
+        handleButtonState(setButtonDelete, false, 'Да')
       })
       .catch(err => console.log(err))
   }
