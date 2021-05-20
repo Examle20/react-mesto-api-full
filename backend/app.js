@@ -14,10 +14,7 @@ const cors = require('cors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors({
-  origin: 'https://mesto.project.nomoredomains.club/',
-  credentials: true,
-}));
+
 
 //app.use(cookieParser())
 app.use(bodyParser.json());
@@ -31,7 +28,10 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger);
-app.use(cors());
+app.use(cors({
+  origin: 'https://mesto.project.nomoredomains.club',
+  credentials: true,
+}));
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
