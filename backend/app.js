@@ -5,7 +5,7 @@ require('dotenv').config();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { celebrate, Joi, errors } = require('celebrate');
 const NotFoundError = require('./errors/notFoundError');
-
+const cookieParser = require('cookie-parser');
 const {
   login, createUser,
 } = require('./controllers/users');
@@ -15,7 +15,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 const cors = require('cors');
-
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
