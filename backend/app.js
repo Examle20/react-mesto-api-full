@@ -10,11 +10,12 @@ const {
   login, createUser,
 } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-
+const cors = require('cors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-const cors = require('cors');
+app.use(cors());
+
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
