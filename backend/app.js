@@ -14,7 +14,10 @@ const cors = require('cors');
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://mesto.project.nomoredomains.club/',
+  credentials: true,
+}));
 
 app.use(cookieParser())
 app.use(bodyParser.json());
