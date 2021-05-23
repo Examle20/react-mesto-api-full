@@ -212,7 +212,7 @@ function App(props) {
       })
         .catch(err => {
           console.log(err)
-        });
+      });
   }
 
   const handleSigOut = () => {
@@ -221,6 +221,7 @@ function App(props) {
         setOut(false);
         setUserEmail('');
         setloggedIn(false);
+        localStorage.removeItem('authorize')
       })
       .catch(err => {
         console.log(err)
@@ -234,6 +235,7 @@ function App(props) {
         setOut(true);
         setloggedIn(true);
         props.history.push('/');
+        localStorage.setItem('authorize', 'true')
       })
       .catch( err => {
         console.log(err);
@@ -254,7 +256,7 @@ function App(props) {
   }
 
   React.useEffect(() => {
-    handleTokenCheck();
+    if(localStorage.getItem('authorize')) handleTokenCheck();
   },[])
 
   return (
