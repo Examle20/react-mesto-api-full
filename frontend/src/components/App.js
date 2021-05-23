@@ -18,7 +18,7 @@ import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import api from "../utils/api";
 import * as auth from "../utils/auth";
-import FailPopup from "./FailPopup";
+
 
 function App(props) {
 
