@@ -38,7 +38,7 @@ function AddPlacePopup(props) {
           <h2 className="popup__title popup__title_place">Новое место</h2>
           <label className="popup__form-field">
             <Input
-              name='name'
+              name='name-add'
               type='text'
               placeholder='Название'
               minLength='2'
