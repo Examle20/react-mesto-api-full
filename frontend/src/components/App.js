@@ -71,13 +71,13 @@ function App(props) {
 
   React.useEffect(() =>{
     if (loggedIn) {
-      api.getUser(localStorage.getItem('jwt'))
+      api.getUser()
         .then((res) => {
           setCurrentUser(res);
         },)
         .catch(err => console.log(err))
       setIsloading(true)
-      api.getInitialCards(localStorage.getItem('jwt'))
+      api.getInitialCards()
         .then((res) => {
           setCards(res);
           setIsloading(false)
@@ -93,7 +93,7 @@ function App(props) {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, isLiked, localStorage.getItem('jwt'))
+    api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -102,7 +102,7 @@ function App(props) {
 
   function handleCardDelete(card) {
     handleButtonState(setButtonDelete, true, 'Удаление...')
-    api.removeCard(card._id, localStorage.getItem('jwt'))
+    api.removeCard(card._id)
       .then((res) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id))
         closeAllPopups();
@@ -113,7 +113,7 @@ function App(props) {
 
   const handleAddPlace = (name, link) => {
     handleButtonState(setButtonCreate,true, 'Создание...')
-    api.addCard(name, link, localStorage.getItem('jwt'))
+    api.addCard(name, link)
       .then(res => {
         console.log(res)
         setCards([res, ...cards]);
@@ -178,7 +178,7 @@ function App(props) {
 
   const handleUpdateUser = ({name, about}) => {
     handleButtonState(setButtonSave, true,'Сохранение...')
-    api.editUserInfo(name, about, localStorage.getItem('jwt'))
+    api.editUserInfo(name, about)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -191,7 +191,7 @@ function App(props) {
 
   const handleUpdateAvatar = (avatar) => {
     handleButtonState(setButtonSave, true,'Сохранение...')
-    api.changeAvatar(avatar, localStorage.getItem('jwt'))
+    api.changeAvatar(avatar)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -203,9 +203,7 @@ function App(props) {
   }
 
   const handleTokenCheck = () => {
-    if (localStorage.getItem('jwt')){
-      const jwt = localStorage.getItem('jwt');
-      auth.checkToken(jwt).then((res) => {
+      auth.checkToken().then((res) => {
         if (res){
           setUserEmail(res.email)
           setloggedIn(true);
@@ -215,20 +213,23 @@ function App(props) {
         .catch(err => {
           console.log(err)
         });
-    }
   }
 
   const handleSigOut = () => {
-    localStorage.removeItem('jwt')
-    setOut(false);
-    setUserEmail('');
-    setloggedIn(false);
+    auth.signOut()
+      .then(() => {
+        setOut(false);
+        setUserEmail('');
+        setloggedIn(false);
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   const handleAuthorize = (email, password) => {
     auth.authorize(email, password)
       .then((res) => {
-        localStorage.setItem('jwt', res.token);
         setUserEmail(email);
         setOut(true);
         setloggedIn(true);

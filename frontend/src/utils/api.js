@@ -5,11 +5,11 @@ export class Api {
     this._contentType = contentType;
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,
       {
+        credentials: 'include',
         headers: {
-          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }
@@ -26,8 +26,8 @@ export class Api {
   getUser(token) {
     return fetch(`${this._baseUrl}/users/me`,
       {
+        credentials: 'include',
         headers:{
-          authorization: 'Bearer ' + token,
           'Content-Type': this._contentType,
         }
       }
@@ -41,11 +41,11 @@ export class Api {
       })
   }
 
-  editUserInfo(name, about, token) {
+  editUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`,{
       method: 'PATCH',
+      credentials: 'include',
       headers: {
-        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
       body: JSON.stringify({
@@ -62,11 +62,11 @@ export class Api {
       })
   }
 
-  addCard(name, link, token) {
+  addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
-        authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
       },
       body: JSON.stringify({
@@ -86,6 +86,7 @@ export class Api {
   putLike(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
@@ -103,6 +104,7 @@ export class Api {
   removeLike(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
@@ -120,6 +122,7 @@ export class Api {
   removeCard(_id, token) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
@@ -137,6 +140,7 @@ export class Api {
   changeAvatar(avatar, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         authorization: 'Bearer ' + token,
         'Content-Type': this._contentType,
@@ -163,6 +167,6 @@ export class Api {
 }
 
 
-const api = new Api('https://api.mesto.examle.nomoredomains.club', 'application/json');
+const api = new Api('https://api.mesto.examle.nomoredomains.club/', 'application/json');
 
 export default api;

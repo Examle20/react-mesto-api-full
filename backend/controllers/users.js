@@ -13,6 +13,9 @@ module.exports.getUsers = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.signOut = (req, res, next) => {
+  res.clearCookie('jwt').end();
+};
 module.exports.getUser = (req, res, next) => {
   User.findById(req.params.userId)
     .then((user) => {
@@ -119,9 +122,9 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.send({ token });
-      res.cookie('jwt', token, {
-        maxAge: 7,
+      //res.send({ token });
+      res.cookie('jwt', 'Bearer ' + token, {
+        maxAge: 3600000,
         httpOnly: true,
       })
         .end();
