@@ -167,6 +167,6 @@ export class Api {
 }
 
 
-const api = new Api('https://api.mesto.examle.nomoredomains.club/', 'application/json');
+const api = new Api('https://api.mesto.examle.nomoredomains.club', 'application/json');
 
 export default api;
