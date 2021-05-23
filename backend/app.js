@@ -29,7 +29,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger);
 app.use(cors({
-  origin: 'https://mesto.project.nomoredomains.club/sign-in',
+  origin: 'https://mesto.project.nomoredomains.club',
   credentials: true,
 }));
 app.get('/crash-test', () => {
